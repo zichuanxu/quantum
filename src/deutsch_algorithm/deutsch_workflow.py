@@ -21,7 +21,7 @@ from src.utils.markdown_generator import DeutschReportGenerator
 class DeutschWorkflow:
     """Main workflow for executing Deutsch algorithm analysis."""
 
-    def __init__(self, base_dir: str = "quantum", shots: int = 1024):
+    def __init__(self, base_dir: str = ".", shots: int = 1024):
         """
         Initialize Deutsch workflow.
 

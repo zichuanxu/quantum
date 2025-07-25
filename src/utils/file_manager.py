@@ -11,7 +11,7 @@ from typing import Union
 class FileManager:
     """Manages file operations and directory structure for the quantum assignment."""
 
-    def __init__(self, base_dir: str = "quantum"):
+    def __init__(self, base_dir: str = "."):
         """Initialize FileManager with base directory."""
         self.base_dir = Path(base_dir)
         self.results_dir = self.base_dir / "results"

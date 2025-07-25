@@ -16,7 +16,7 @@ from src.svm_comparison.svm_workflow import SVMWorkflow
 from src.utils.file_manager import FileManager
 
 
-def run_deutsch_analysis(base_dir: str = "quantum", shots: int = 1024) -> dict:
+def run_deutsch_analysis(base_dir: str = ".", shots: int = 1024) -> dict:
     """
     Run Deutsch algorithm analysis.
 
@@ -32,7 +32,7 @@ def run_deutsch_analysis(base_dir: str = "quantum", shots: int = 1024) -> dict:
     return workflow.run_complete_analysis()
 
 
-def run_svm_comparison(base_dir: str = "quantum",
+def run_svm_comparison(base_dir: str = ".",
                       digit_pairs: list = None,
                       kernels: list = None,
                       random_state: int = 42) -> dict:
@@ -58,7 +58,7 @@ def run_svm_comparison(base_dir: str = "quantum",
     return workflow.run_complete_analysis(digit_pairs, kernels)
 
 
-def run_complete_assignment(base_dir: str = "quantum",
+def run_complete_assignment(base_dir: str = ".",
                           shots: int = 1024,
                           digit_pairs: list = None,
                           kernels: list = None,
@@ -173,6 +173,7 @@ Examples:
   python main.py --shots 2048              # Use 2048 shots for quantum circuits
   python main.py --digits 0 1 5 6         # Compare digits 0vs1 and 5vs6
   python main.py --kernels linear rbf poly # Test linear, RBF, and polynomial kernels
+  python main.py --base-dir my_results     # Output to custom directory
         """
     )
 
@@ -180,8 +181,8 @@ Examples:
                        help='Run only Deutsch algorithm analysis')
     parser.add_argument('--svm-only', action='store_true',
                        help='Run only SVM comparison analysis')
-    parser.add_argument('--base-dir', type=str, default='quantum',
-                       help='Base directory for the project (default: quantum)')
+    parser.add_argument('--base-dir', type=str, default='.',
+                       help='Base directory for the project (default: current directory)')
     parser.add_argument('--shots', type=int, default=1024,
                        help='Number of shots for quantum circuits (default: 1024)')
     parser.add_argument('--digits', type=int, nargs='+',

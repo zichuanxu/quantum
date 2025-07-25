@@ -24,7 +24,7 @@ from src.utils.markdown_generator import SVMReportGenerator
 class SVMWorkflow:
     """Main workflow for executing SVM comparison analysis."""
 
-    def __init__(self, base_dir: str = "quantum", random_state: int = 42):
+    def __init__(self, base_dir: str = ".", random_state: int = 42):
         """
         Initialize SVM workflow.
 

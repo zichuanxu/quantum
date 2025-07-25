@@ -1,4 +1,4 @@
-# Quantum Computing Assignment 3
+# Quantum Computing
 
 Implementation of Deutsch Algorithm and Quantum vs Classical SVM Comparison
 
@@ -11,8 +11,7 @@ This project implements two main components for a quantum computing assignment:
 
 ## Project Structure
 
-```
-quantum/
+```text
 ├── main.py                     # Main application entry point
 ├── requirements.txt            # Python dependencies
 ├── README.md                   # This file
@@ -32,13 +31,12 @@ quantum/
 │   └── utils/                  # Utility modules
 │       ├── file_manager.py     # File and directory management
 │       └── markdown_generator.py # Report generation
-├── tests/                      # Unit tests
-├── results/                    # Generated results
-│   ├── deutsch_results.md      # Deutsch algorithm report
-│   ├── svm_comparison.md       # SVM comparison report
-│   └── images/                 # Generated visualizations
-│       ├── deutsch/            # Deutsch algorithm images
-│       └── svm/                # SVM comparison images
+└── results/                    # Generated results (created automatically)
+    ├── deutsch_results.md      # Deutsch algorithm report
+    ├── svm_comparison.md       # SVM comparison report
+    └── images/                 # Generated visualizations
+        ├── deutsch/            # Deutsch algorithm images
+        └── svm/                # SVM comparison images
 ```
 
 ## Installation
@@ -104,7 +102,7 @@ python main.py --random-state 123
 **Output Directory:**
 
 ```bash
-python main.py --base-dir my_quantum_results
+python main.py --base-dir my_results  # Change output directory
 ```
 
 ## Features
@@ -138,7 +136,7 @@ python main.py --base-dir my_quantum_results
 
 After execution, the following files will be generated:
 
-### Reports
+### Markdown Reports
 
 - `results/deutsch_results.md`: Complete Deutsch algorithm analysis
 - `results/svm_comparison.md`: Complete SVM comparison analysis
@@ -175,69 +173,3 @@ The comparison includes:
 - **QSVM**: Quantum kernel-based classification
 - **CSVM**: Classical SVM with linear, RBF, polynomial kernels
 - **Metrics**: Accuracy, precision, recall, F1-score, training time
-
-## Dependencies
-
-Key dependencies include:
-
-- `qiskit>=1.1.0`: Quantum computing framework
-- `qiskit-aer>=0.14.2`: Quantum simulator
-- `qiskit-machine-learning>=0.7.0`: Quantum machine learning
-- `scikit-learn>=1.3.0`: Classical machine learning
-- `matplotlib>=3.7.0`: Plotting and visualization
-- `numpy>=1.24.0`: Numerical computing
-- `seaborn>=0.12.0`: Statistical visualization
-
-## Testing
-
-Run unit tests:
-
-```bash
-python -m pytest tests/ -v
-```
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Qiskit Installation**: If you encounter Qiskit installation issues, try:
-
-   ```bash
-   pip install --upgrade pip
-   pip install qiskit qiskit-aer qiskit-machine-learning
-   ```
-
-2. **Memory Issues**: For large datasets or high-resolution visualizations:
-
-   ```bash
-   python main.py --shots 512  # Reduce quantum circuit shots
-   ```
-
-3. **QSVM Failures**: If QSVM training fails, the system automatically falls back to classical methods with quantum kernels.
-
-### Performance Optimization
-
-- Use fewer shots for faster quantum circuit execution (trade-off with accuracy)
-- Reduce visualization resolution for faster image generation
-- Use linear kernels for faster classical SVM training
-
-## Assignment Requirements Compliance
-
-This implementation fulfills all assignment requirements:
-
-✅ **Deutsch Algorithm**: Four circuit cases with state analysis and visualization
-✅ **SVM Comparison**: QSVM vs CSVM with timing and accuracy analysis
-✅ **Datasets**: Uses sklearn digits dataset with specified digit pairs
-✅ **Dimensionality Reduction**: PCA from 64 to 2 dimensions
-✅ **Kernel Comparison**: Multiple kernel types tested
-✅ **Visualization**: Decision boundaries and performance charts
-✅ **Documentation**: Comprehensive markdown reports
-✅ **No Terminal Output**: All results saved to files
-
-## License
-
-This project is created for educational purposes as part of a quantum computing assignment.
-
-## Contact
-
-For questions or issues related to this implementation, please refer to the generated reports and documentation.
