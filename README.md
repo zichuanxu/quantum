@@ -47,7 +47,6 @@ This project implements two main components for a quantum computing assignment:
    conda create -n quantum python=3.9
    conda activate quantum
    ```
-
 2. **Install dependencies**:
 
    ```bash
@@ -105,33 +104,6 @@ python main.py --random-state 123
 python main.py --base-dir my_results  # Change output directory
 ```
 
-## Features
-
-### Deutsch Algorithm Analysis
-
-- **Four Circuit Cases**: Implementation of all four Deutsch algorithm variants
-- **Quantum State Analysis**: Analysis of qubit states before and after Hadamard gates
-- **Bloch Sphere Visualization**: 3D visualization of quantum states
-- **Circuit Diagrams**: Visual representation of quantum circuits
-- **Measurement Analysis**: Statistical analysis of measurement outcomes
-
-### SVM Comparison
-
-- **Data Processing**: Automatic loading and preprocessing of digits dataset
-- **Dimensionality Reduction**: PCA reduction from 64 to 2 dimensions
-- **QSVM Implementation**: Quantum SVM using quantum kernels
-- **CSVM Implementation**: Classical SVM with multiple kernel options
-- **Performance Analysis**: Comprehensive timing and accuracy comparison
-- **Decision Boundaries**: Visualization of classification boundaries
-- **Kernel Comparison**: Analysis of different kernel performances
-
-### Visualization and Reporting
-
-- **Automated Reporting**: Comprehensive markdown reports with embedded images
-- **Professional Visualizations**: High-quality plots and charts
-- **Organized Output**: Structured directory layout for easy navigation
-- **Image Management**: Automatic image saving and referencing
-
 ## Output Files
 
 After execution, the following files will be generated:
@@ -145,31 +117,3 @@ After execution, the following files will be generated:
 
 - `results/images/deutsch/`: Bloch spheres, circuit diagrams, comparison plots
 - `results/images/svm/`: Decision boundaries, performance charts, confusion matrices
-
-## Technical Details
-
-### Deutsch Algorithm Implementation
-
-The implementation covers four cases:
-
-1. **Case 1**: Identity function (constant 0)
-2. **Case 2**: NOT function (balanced)
-3. **Case 3**: Constant 1 function
-4. **Case 4**: Complex oracle function
-
-Each case includes:
-
-- Quantum circuit construction
-- State vector analysis before/after final Hadamard gate
-- Bloch sphere coordinate calculation
-- Measurement probability analysis
-
-### SVM Comparison Implementation
-
-The comparison includes:
-
-- **Data**: sklearn digits dataset (digits 3vs4, 1vs2)
-- **Preprocessing**: PCA dimensionality reduction to 2D
-- **QSVM**: Quantum kernel-based classification
-- **CSVM**: Classical SVM with linear, RBF, polynomial kernels
-- **Metrics**: Accuracy, precision, recall, F1-score, training time
