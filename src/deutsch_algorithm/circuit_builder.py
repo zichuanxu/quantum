@@ -73,7 +73,7 @@ class CircuitBuilder:
     def create_circuit_case_3(self) -> QuantumCircuit:
         """
         Create Case 3: Constant function f(x) = 1.
-        Oracle: X gate on q1, then CNOT, then X gate on q1 again.
+        Oracle: X gate on q1 (flips the ancilla to implement constant 1).
         """
         # Create circuit with 2 qubits and 1 classical bit
         qc = QuantumCircuit(2, 1)
@@ -86,9 +86,7 @@ class CircuitBuilder:
         qc.h(1)
 
         # Oracle for case 3: Constant function f(x) = 1
-        # Apply X gate to q1, then CNOT, then X gate to q1 again
-        qc.x(1)
-        qc.cx(0, 1)
+        # Simply flip q1 to implement f(x) = 1 for all x
         qc.x(1)
 
         # Apply final Hadamard gate to q0
@@ -101,8 +99,9 @@ class CircuitBuilder:
 
     def create_circuit_case_4(self) -> QuantumCircuit:
         """
-        Create Case 4: More complex oracle function.
-        Oracle: CNOT, X gate on q1, then another CNOT.
+        Create Case 4: Identity function (f(x) = x).
+        Oracle: X gate on ancilla, then CNOT, then X gate on ancilla again.
+        This implements f(0) = 0, f(1) = 1 (balanced function).
         """
         # Create circuit with 2 qubits and 1 classical bit
         qc = QuantumCircuit(2, 1)
@@ -114,11 +113,13 @@ class CircuitBuilder:
         qc.h(0)
         qc.h(1)
 
-        # Oracle for case 4: Complex oracle
-        # CNOT, then X on q1, then CNOT again
-        qc.cx(0, 1)
+        # Oracle for case 4: Identity function f(x) = x
+        # X on q1, then CNOT, then X on q1 again
+        # This sequence flips the ancilla, applies CNOT, then flips back
+        # Net effect: f(0) = 0, f(1) = 1
         qc.x(1)
         qc.cx(0, 1)
+        qc.x(1)
 
         # Apply final Hadamard gate to q0
         qc.h(0)
@@ -198,28 +199,28 @@ class CircuitBuilder:
         """
         descriptions = {
             1: {
-                'name': 'Identity Function',
+                'name': 'Constant Zero Function',
                 'oracle_type': 'No oracle gates (identity)',
                 'function': 'f(x) = 0 for all x',
                 'expected_result': 'Always measure 0 (constant function)'
             },
             2: {
-                'name': 'NOT Function',
+                'name': 'NOT Function (Balanced)',
                 'oracle_type': 'CNOT gate',
                 'function': 'f(x) = NOT x',
                 'expected_result': 'Always measure 1 (balanced function)'
             },
             3: {
-                'name': 'Constant 1 Function',
-                'oracle_type': 'X-CNOT-X sequence',
+                'name': 'Constant One Function',
+                'oracle_type': 'X gate on ancilla',
                 'function': 'f(x) = 1 for all x',
                 'expected_result': 'Always measure 0 (constant function)'
             },
             4: {
-                'name': 'Complex Oracle Function',
-                'oracle_type': 'CNOT-X-CNOT sequence',
-                'function': 'Complex oracle implementation',
-                'expected_result': 'Measurement depends on oracle behavior'
+                'name': 'Identity Function (Balanced)',
+                'oracle_type': 'X-CNOT-X sequence',
+                'function': 'f(x) = x (identity function)',
+                'expected_result': 'Always measure 1 (balanced function)'
             }
         }
 

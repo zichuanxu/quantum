@@ -1,6 +1,6 @@
 # Deutsch Algorithm Implementation Results
 
-Generated on: 2025-07-26 07:43:15
+Generated on: 2025-08-01 08:59:22
 
 ---
 
@@ -8,7 +8,7 @@ Generated on: 2025-07-26 07:43:15
 
 This report presents the implementation and analysis of the Deutsch algorithm across four different quantum circuit configurations. Each case demonstrates different oracle functions and their impact on quantum state evolution.
 
-## Case 1: Identity Function
+## Case 1: Constant Zero Function
 
 ### Circuit Description
 
@@ -22,15 +22,15 @@ Oracle Type: No oracle gates (identity)
 
 **States before final Hadamard gate:**
 
-- q0: |0⟩
+- q0: |0>
 
-- q1: |1⟩
+- q1: |1>
 
 **States after final Hadamard gate:**
 
-- q0: |0⟩
+- q0: |0>
 
-- q1: |-⟩ = (|0⟩ - |1⟩)/√2
+- q1: |-> = (|0> - |1>)/sqrt(2)
 
 ### Bloch Sphere Visualizations
 
@@ -54,7 +54,7 @@ Oracle Type: No oracle gates (identity)
 
 - Outcome '0': 1024/1024 (100.0%)
 
-## Case 2: NOT Function
+## Case 2: NOT Function (Balanced)
 
 ### Circuit Description
 
@@ -68,15 +68,15 @@ Oracle Type: CNOT gate
 
 **States before final Hadamard gate:**
 
-- q0: |0⟩
+- q0: |0>
 
-- q1: |1⟩
+- q1: |1>
 
 **States after final Hadamard gate:**
 
-- q0: |1⟩
+- q0: |1>
 
-- q1: |-⟩ = (|0⟩ - |1⟩)/√2
+- q1: |-> = (|0> - |1>)/sqrt(2)
 
 ### Bloch Sphere Visualizations
 
@@ -100,11 +100,11 @@ Oracle Type: CNOT gate
 
 - Outcome '1': 1024/1024 (100.0%)
 
-## Case 3: Constant 1 Function
+## Case 3: Constant One Function
 
 ### Circuit Description
 
-Oracle Type: X-CNOT-X sequence
+Oracle Type: X gate on ancilla
 
 ![Circuit Case 3](images/deutsch/circuit_case_3.png)
 
@@ -114,15 +114,15 @@ Oracle Type: X-CNOT-X sequence
 
 **States before final Hadamard gate:**
 
-- q0: |0⟩
+- q0: |0>
 
-- q1: |1⟩
+- q1: |1>
 
 **States after final Hadamard gate:**
 
-- q0: |1⟩
+- q0: |0>
 
-- q1: |-⟩ = (|0⟩ - |1⟩)/√2
+- q1: |-> = (|0> - |1>)/sqrt(2)
 
 ### Bloch Sphere Visualizations
 
@@ -144,13 +144,13 @@ Oracle Type: X-CNOT-X sequence
 
 ### Measurement Results
 
-- Outcome '1': 1024/1024 (100.0%)
+- Outcome '0': 1024/1024 (100.0%)
 
-## Case 4: Complex Oracle Function
+## Case 4: Identity Function (Balanced)
 
 ### Circuit Description
 
-Oracle Type: CNOT-X-CNOT sequence
+Oracle Type: X-CNOT-X sequence
 
 ![Circuit Case 4](images/deutsch/circuit_case_4.png)
 
@@ -160,15 +160,15 @@ Oracle Type: CNOT-X-CNOT sequence
 
 **States before final Hadamard gate:**
 
-- q0: |0⟩
+- q0: |0>
 
-- q1: |1⟩
+- q1: |1>
 
 **States after final Hadamard gate:**
 
-- q0: |0⟩
+- q0: |1>
 
-- q1: |-⟩ = (|0⟩ - |1⟩)/√2
+- q1: |-> = (|0> - |1>)/sqrt(2)
 
 ### Bloch Sphere Visualizations
 
@@ -190,7 +190,7 @@ Oracle Type: CNOT-X-CNOT sequence
 
 ### Measurement Results
 
-- Outcome '0': 1024/1024 (100.0%)
+- Outcome '1': 1024/1024 (100.0%)
 
 ## Cross-Case Comparison
 
@@ -207,7 +207,8 @@ The Deutsch algorithm demonstrates quantum parallelism by determining whether a 
 **Key Observations:**
 
 - Cases 1 and 3 implement constant functions (f(x) = 0 and f(x) = 1 respectively)
-- Case 2 implements a balanced function (f(x) = NOT x)
-- Case 4 demonstrates a more complex oracle implementation
+- Cases 2 and 4 implement balanced functions (f(x) = NOT x and f(x) = x respectively)
 - The final measurement of q0 reveals the function type: 0 for constant, 1 for balanced
+- Constant functions: Case 1 (f(x) = 0) and Case 3 (f(x) = 1) both measure 0
+- Balanced functions: Case 2 (f(x) = NOT x) and Case 4 (f(x) = x) both measure 1
 - Quantum superposition allows simultaneous evaluation of the function on all inputs

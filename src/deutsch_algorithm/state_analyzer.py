@@ -173,18 +173,18 @@ class StateAnalyzer:
             else:
                 beta = beta_magnitude
 
-            # Format the state string
+            # Format the state string using ASCII characters
             if abs(alpha) < 1e-10:
-                return "|1⟩"
+                return "|1>"
             elif abs(beta) < 1e-10:
-                return "|0⟩"
+                return "|0>"
             elif abs(abs(alpha) - abs(beta)) < 1e-10:  # Equal superposition
                 if abs(np.real(beta) - np.real(alpha)) < 1e-10:
-                    return "|+⟩ = (|0⟩ + |1⟩)/√2"
+                    return "|+> = (|0> + |1>)/sqrt(2)"
                 else:
-                    return "|-⟩ = (|0⟩ - |1⟩)/√2"
+                    return "|-> = (|0> - |1>)/sqrt(2)"
             else:
-                return f"{alpha:.3f}|0⟩ + {beta:.3f}|1⟩"
+                return f"{alpha:.3f}|0> + {beta:.3f}|1>"
         else:
             # Mixed state
             return f"Mixed state (purity: {trace_rho_squared:.3f})"

@@ -124,7 +124,7 @@ def run_complete_assignment(base_dir: str = ".",
 
         # Generate final summary
         print("\n" + "=" * 80)
-        print("ASSIGNMENT COMPLETION SUMMARY")
+        print("COMPLETION SUMMARY")
         print("=" * 80)
 
         deutsch_success = 'error' not in deutsch_results
@@ -134,7 +134,7 @@ def run_complete_assignment(base_dir: str = ".",
         print(f"SVM Comparison Analysis: {'✓ SUCCESS' if svm_success else '✗ FAILED'}")
 
         if deutsch_success and svm_success:
-            print("\n🎉 ASSIGNMENT COMPLETED SUCCESSFULLY! 🎉")
+            print("\n🎉 COMPLETED SUCCESSFULLY! 🎉")
             print("\nGenerated Files:")
             print(f"  - Deutsch Report: {deutsch_results['report_path']}")
             print(f"  - SVM Report: {svm_results['report_path']}")
@@ -146,7 +146,7 @@ def run_complete_assignment(base_dir: str = ".",
                 (deutsch_results['success_rate'] + svm_results['success_rate']) / 2
             )
         else:
-            print("\n⚠️  ASSIGNMENT PARTIALLY COMPLETED")
+            print("\n⚠️ PARTIALLY COMPLETED")
             results['status'] = 'PARTIAL'
 
         print("\nAll results have been saved to markdown files with organized visualizations.")

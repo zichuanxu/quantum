@@ -244,9 +244,10 @@ class DeutschWorkflow:
 
         observations = [
             "Cases 1 and 3 implement constant functions (f(x) = 0 and f(x) = 1 respectively)",
-            "Case 2 implements a balanced function (f(x) = NOT x)",
-            "Case 4 demonstrates a more complex oracle implementation",
+            "Cases 2 and 4 implement balanced functions (f(x) = NOT x and f(x) = x respectively)",
             "The final measurement of q0 reveals the function type: 0 for constant, 1 for balanced",
+            "Constant functions: Case 1 (f(x) = 0) and Case 3 (f(x) = 1) both measure 0",
+            "Balanced functions: Case 2 (f(x) = NOT x) and Case 4 (f(x) = x) both measure 1",
             "Quantum superposition allows simultaneous evaluation of the function on all inputs"
         ]
 

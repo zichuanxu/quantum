@@ -87,7 +87,7 @@ class MarkdownGenerator:
     def save_to_file(self, filepath: Path) -> None:
         """Save the markdown content to a file."""
         filepath.parent.mkdir(parents=True, exist_ok=True)
-        filepath.write_text(self.get_content())
+        filepath.write_text(self.get_content(), encoding='utf-8')
 
 
 class DeutschReportGenerator(MarkdownGenerator):

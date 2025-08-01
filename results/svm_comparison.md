@@ -1,6 +1,6 @@
 # Quantum SVM vs Classical SVM Comparison
 
-Generated on: 2025-07-26 08:17:26
+Generated on: 2025-08-01 08:31:51
 
 ---
 
@@ -14,7 +14,7 @@ This report compares the performance of Quantum Support Vector Machine (QSVM) an
 
 | Metric | QSVM | CSVM | Difference |
 | --- | --- | --- | --- |
-| Training Time (s) | 21.0757 | 0.0008 | 21.0749 |
+| Training Time (s) | 27.4618 | 0.0010 | 27.4608 |
 | Accuracy (%) | 0.54 | 1.00 | -0.46 |
 
 ### Decision Boundary Visualization
@@ -25,7 +25,7 @@ This report compares the performance of Quantum Support Vector Machine (QSVM) an
 
 ### Analysis
 
-QSVM took 26434.8x longer to train than CSVM.
+QSVM took 27457.3x longer to train than CSVM.
 
 CSVM achieved 0.46% higher accuracy than QSVM.
 
@@ -35,7 +35,7 @@ CSVM achieved 0.46% higher accuracy than QSVM.
 
 | Metric | QSVM | CSVM | Difference |
 | --- | --- | --- | --- |
-| Training Time (s) | 24.5719 | 0.0010 | 24.5709 |
+| Training Time (s) | 35.3114 | 0.0020 | 35.3094 |
 | Accuracy (%) | 0.54 | 1.00 | -0.46 |
 
 ### Decision Boundary Visualization
@@ -46,7 +46,7 @@ CSVM achieved 0.46% higher accuracy than QSVM.
 
 ### Analysis
 
-QSVM took 24721.0x longer to train than CSVM.
+QSVM took 17728.9x longer to train than CSVM.
 
 CSVM achieved 0.46% higher accuracy than QSVM.
 
@@ -56,7 +56,7 @@ CSVM achieved 0.46% higher accuracy than QSVM.
 
 | Metric | QSVM | CSVM | Difference |
 | --- | --- | --- | --- |
-| Training Time (s) | 24.1361 | 0.0034 | 24.1328 |
+| Training Time (s) | 33.6983 | 0.0041 | 33.6942 |
 | Accuracy (%) | 0.51 | 0.87 | -0.36 |
 
 ### Decision Boundary Visualization
@@ -67,7 +67,7 @@ CSVM achieved 0.46% higher accuracy than QSVM.
 
 ### Analysis
 
-QSVM took 7194.0x longer to train than CSVM.
+QSVM took 8243.9x longer to train than CSVM.
 
 CSVM achieved 0.36% higher accuracy than QSVM.
 
@@ -77,7 +77,7 @@ CSVM achieved 0.36% higher accuracy than QSVM.
 
 | Metric | QSVM | CSVM | Difference |
 | --- | --- | --- | --- |
-| Training Time (s) | 26.5439 | 0.0022 | 26.5417 |
+| Training Time (s) | 31.5922 | 0.0025 | 31.5896 |
 | Accuracy (%) | 0.51 | 0.87 | -0.36 |
 
 ### Decision Boundary Visualization
@@ -88,7 +88,7 @@ CSVM achieved 0.36% higher accuracy than QSVM.
 
 ### Analysis
 
-QSVM took 12004.9x longer to train than CSVM.
+QSVM took 12630.5x longer to train than CSVM.
 
 CSVM achieved 0.36% higher accuracy than QSVM.
 
@@ -98,9 +98,9 @@ CSVM achieved 0.36% higher accuracy than QSVM.
 
 | Kernel | Accuracy | Training Time (s) | F1-Score |
 | --- | --- | --- | --- |
-| Linear | 1.000 | 0.0008 | 1.000 |
-| Rbf | 1.000 | 0.0009 | 1.000 |
-| Poly | 0.991 | 0.0011 | 0.991 |
+| Linear | 1.000 | 0.0011 | 1.000 |
+| Rbf | 1.000 | 0.0020 | 1.000 |
+| Poly | 0.991 | 0.0010 | 0.991 |
 
 ![Kernel Comparison for Digits 3 vs 4](images/svm/kernels_3vs4.png)
 
@@ -110,9 +110,9 @@ CSVM achieved 0.36% higher accuracy than QSVM.
 
 | Kernel | Accuracy | Training Time (s) | F1-Score |
 | --- | --- | --- | --- |
-| Linear | 0.870 | 0.0034 | 0.877 |
-| Rbf | 0.870 | 0.0024 | 0.879 |
-| Poly | 0.889 | 0.0019 | 0.898 |
+| Linear | 0.870 | 0.0050 | 0.877 |
+| Rbf | 0.870 | 0.0030 | 0.879 |
+| Poly | 0.889 | 0.0020 | 0.898 |
 
 ![Kernel Comparison for Digits 1 vs 2](images/svm/kernels_1vs2.png)
 
@@ -122,9 +122,9 @@ CSVM achieved 0.36% higher accuracy than QSVM.
 
 **Overall Performance Summary:**
 
-- Average QSVM training time: 24.0819s
+- Average QSVM training time: 32.0159s
 
-- Average CSVM training time: 0.0018s
+- Average CSVM training time: 0.0024s
 
 - Average QSVM accuracy: 0.52%
 
@@ -142,5 +142,5 @@ CSVM achieved 0.36% higher accuracy than QSVM.
 - QSVM accuracy wins: 0/4 experiments
 - Average QSVM accuracy: 0.523
 - Average CSVM accuracy: 0.935
-- Average QSVM training time: 24.0819s
-- Average CSVM training time: 0.0018s
+- Average QSVM training time: 32.0159s
+- Average CSVM training time: 0.0024s
