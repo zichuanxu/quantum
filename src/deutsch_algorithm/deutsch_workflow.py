@@ -243,15 +243,34 @@ class DeutschWorkflow:
         )
 
         observations = [
+            "Initial state after first Hadamard gates: All cases start with |+>|-> state",
             "Cases 1 and 3 implement constant functions (f(x) = 0 and f(x) = 1 respectively)",
             "Cases 2 and 4 implement balanced functions (f(x) = NOT x and f(x) = x respectively)",
+            "Phase kickback mechanism: Balanced functions flip q0 from |+> to |-> before final Hadamard",
+            "Constant functions: q0 remains in |+> state, final measurement gives 0",
+            "Balanced functions: q0 flips to |-> state, final measurement gives 1",
             "The final measurement of q0 reveals the function type: 0 for constant, 1 for balanced",
-            "Constant functions: Case 1 (f(x) = 0) and Case 3 (f(x) = 1) both measure 0",
-            "Balanced functions: Case 2 (f(x) = NOT x) and Case 4 (f(x) = x) both measure 1",
             "Quantum superposition allows simultaneous evaluation of the function on all inputs"
         ]
 
         self.report_generator.add_list(observations)
+
+        # Add detailed phase kickback explanation
+        self.report_generator.add_header("Phase Kickback Mechanism", 3)
+        self.report_generator.add_paragraph(
+            "The Deutsch algorithm relies on the quantum phase kickback effect to distinguish "
+            "between constant and balanced functions:"
+        )
+
+        phase_kickback_points = [
+            "All circuits start with q0 and q1 in superposition states |+> and |-> respectively",
+            "Constant functions (Cases 1 & 3): Oracle doesn't change q0's state, remains |+>",
+            "Balanced functions (Cases 2 & 4): Oracle causes phase kickback, flipping q0 to |->",
+            "Final Hadamard on q0: |+> → |0> (measure 0), |-> → |1> (measure 1)",
+            "This allows determining function type with just one quantum query"
+        ]
+
+        self.report_generator.add_list(phase_kickback_points)
 
         # Save report
         report_path = self.file_manager.get_results_path("deutsch_results.md")

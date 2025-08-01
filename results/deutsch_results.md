@@ -1,6 +1,6 @@
 # Deutsch Algorithm Implementation Results
 
-Generated on: 2025-08-01 08:59:22
+Generated on: 2025-08-01 09:26:59
 
 ---
 
@@ -22,9 +22,9 @@ Oracle Type: No oracle gates (identity)
 
 **States before final Hadamard gate:**
 
-- q0: |0>
+- q0: |+> = (|0> + |1>)/sqrt(2)
 
-- q1: |1>
+- q1: |-> = (|0> - |1>)/sqrt(2)
 
 **States after final Hadamard gate:**
 
@@ -68,9 +68,9 @@ Oracle Type: CNOT gate
 
 **States before final Hadamard gate:**
 
-- q0: |0>
+- q0: |-> = (|0> - |1>)/sqrt(2)
 
-- q1: |1>
+- q1: |-> = (|0> - |1>)/sqrt(2)
 
 **States after final Hadamard gate:**
 
@@ -114,9 +114,9 @@ Oracle Type: X gate on ancilla
 
 **States before final Hadamard gate:**
 
-- q0: |0>
+- q0: |+> = (|0> + |1>)/sqrt(2)
 
-- q1: |1>
+- q1: |-> = (|0> - |1>)/sqrt(2)
 
 **States after final Hadamard gate:**
 
@@ -160,9 +160,9 @@ Oracle Type: X-CNOT-X sequence
 
 **States before final Hadamard gate:**
 
-- q0: |0>
+- q0: |-> = (|0> - |1>)/sqrt(2)
 
-- q1: |1>
+- q1: |-> = (|0> - |1>)/sqrt(2)
 
 **States after final Hadamard gate:**
 
@@ -206,9 +206,21 @@ The Deutsch algorithm demonstrates quantum parallelism by determining whether a 
 
 **Key Observations:**
 
+- Initial state after first Hadamard gates: All cases start with |+>|-> state
 - Cases 1 and 3 implement constant functions (f(x) = 0 and f(x) = 1 respectively)
 - Cases 2 and 4 implement balanced functions (f(x) = NOT x and f(x) = x respectively)
+- Phase kickback mechanism: Balanced functions flip q0 from |+> to |-> before final Hadamard
+- Constant functions: q0 remains in |+> state, final measurement gives 0
+- Balanced functions: q0 flips to |-> state, final measurement gives 1
 - The final measurement of q0 reveals the function type: 0 for constant, 1 for balanced
-- Constant functions: Case 1 (f(x) = 0) and Case 3 (f(x) = 1) both measure 0
-- Balanced functions: Case 2 (f(x) = NOT x) and Case 4 (f(x) = x) both measure 1
 - Quantum superposition allows simultaneous evaluation of the function on all inputs
+
+### Phase Kickback Mechanism
+
+The Deutsch algorithm relies on the quantum phase kickback effect to distinguish between constant and balanced functions:
+
+- All circuits start with q0 and q1 in superposition states |+> and |-> respectively
+- Constant functions (Cases 1 & 3): Oracle doesn't change q0's state, remains |+>
+- Balanced functions (Cases 2 & 4): Oracle causes phase kickback, flipping q0 to |->
+- Final Hadamard on q0: |+> → |0> (measure 0), |-> → |1> (measure 1)
+- This allows determining function type with just one quantum query

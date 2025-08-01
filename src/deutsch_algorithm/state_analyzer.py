@@ -21,6 +21,7 @@ class StateAnalyzer:
     def _create_circuit_before_final_hadamard(self, original_circuit: QuantumCircuit) -> QuantumCircuit:
         """
         Create a circuit that stops just before the final Hadamard gate on q0.
+        This should include: X(q1), H(q0), H(q1), Oracle operations, but NOT the final H(q0).
 
         Args:
             original_circuit: The complete Deutsch algorithm circuit
@@ -31,25 +32,34 @@ class StateAnalyzer:
         # Create new circuit with same dimensions
         qc = QuantumCircuit(original_circuit.num_qubits)
 
-        # Copy all gates except the last Hadamard on q0 and measurement
-        for instruction in original_circuit.data:
+        # Find the last Hadamard gate on q0 (this is the final Hadamard before measurement)
+        last_h_on_q0_index = -1
+        for i, instruction in enumerate(original_circuit.data):
             gate = instruction.operation
             qubits = instruction.qubits
 
-            # Skip the final Hadamard on q0 and measurement operations
-            # Get qubit index in a version-compatible way
+            # Get qubit index safely
             try:
-                qubit_index = original_circuit.find_bit(qubits[0]).index
-            except (AttributeError, TypeError):
-                try:
+                if hasattr(qubits[0], '_index'):
                     qubit_index = qubits[0]._index
-                except AttributeError:
-                    qubit_index = 0  # Assume first qubit
+                else:
+                    qubit_index = original_circuit.find_bit(qubits[0]).index
+            except (AttributeError, TypeError):
+                qubit_index = 0
 
-            if (gate.name == 'h' and qubit_index == 0 and
-                instruction == original_circuit.data[-2]):  # Second to last instruction
+            # Check if this is a Hadamard gate on q0
+            if gate.name == 'h' and qubit_index == 0:
+                last_h_on_q0_index = i
+
+        # Copy all gates up to (but not including) the last Hadamard on q0
+        for i, instruction in enumerate(original_circuit.data):
+            if i >= last_h_on_q0_index:
                 break
-            elif gate.name == 'measure':
+            gate = instruction.operation
+            qubits = instruction.qubits
+
+            # Skip measurement operations
+            if gate.name == 'measure':
                 break
             else:
                 qc.append(gate, qubits)
@@ -162,29 +172,45 @@ class StateAnalyzer:
         trace_rho_squared = np.real(np.trace(rho @ rho))
 
         if abs(trace_rho_squared - 1.0) < 1e-10:  # Pure state
-            # Extract amplitudes for |0⟩ and |1⟩
-            alpha = np.sqrt(rho[0, 0])
-            beta_magnitude = np.sqrt(rho[1, 1])
+            # Get the Bloch coordinates to determine the state
+            x, y, z = self._density_matrix_to_bloch_coordinates(dm)
 
-            # Get phase from off-diagonal element
-            if abs(rho[0, 1]) > 1e-10:
-                phase = np.angle(rho[0, 1] / (alpha * beta_magnitude)) if beta_magnitude > 1e-10 else 0
-                beta = beta_magnitude * np.exp(1j * phase)
-            else:
-                beta = beta_magnitude
-
-            # Format the state string using ASCII characters
-            if abs(alpha) < 1e-10:
-                return "|1>"
-            elif abs(beta) < 1e-10:
+            # Check for computational basis states
+            if abs(z - 1.0) < 1e-10:  # |0⟩ state
                 return "|0>"
-            elif abs(abs(alpha) - abs(beta)) < 1e-10:  # Equal superposition
-                if abs(np.real(beta) - np.real(alpha)) < 1e-10:
-                    return "|+> = (|0> + |1>)/sqrt(2)"
-                else:
-                    return "|-> = (|0> - |1>)/sqrt(2)"
+            elif abs(z + 1.0) < 1e-10:  # |1⟩ state
+                return "|1>"
+            elif abs(x - 1.0) < 1e-10:  # |+⟩ state
+                return "|+> = (|0> + |1>)/sqrt(2)"
+            elif abs(x + 1.0) < 1e-10:  # |-⟩ state
+                return "|-> = (|0> - |1>)/sqrt(2)"
+            elif abs(y - 1.0) < 1e-10:  # |+i⟩ state
+                return "|+i> = (|0> + i|1>)/sqrt(2)"
+            elif abs(y + 1.0) < 1e-10:  # |-i⟩ state
+                return "|-i> = (|0> - i|1>)/sqrt(2)"
             else:
-                return f"{alpha:.3f}|0> + {beta:.3f}|1>"
+                # General superposition state
+                # Extract amplitudes from density matrix
+                alpha_squared = rho[0, 0]
+                beta_squared = rho[1, 1]
+                alpha = np.sqrt(alpha_squared)
+                beta_magnitude = np.sqrt(beta_squared)
+
+                # Get relative phase from off-diagonal element
+                if abs(rho[0, 1]) > 1e-10 and beta_magnitude > 1e-10:
+                    phase = np.angle(rho[0, 1] / (alpha * beta_magnitude))
+                    beta = beta_magnitude * np.exp(1j * phase)
+                else:
+                    beta = beta_magnitude
+
+                # Format with proper phase
+                if abs(np.imag(beta)) < 1e-10:  # Real coefficient
+                    if np.real(beta) >= 0:
+                        return f"{alpha:.3f}|0> + {np.real(beta):.3f}|1>"
+                    else:
+                        return f"{alpha:.3f}|0> - {abs(np.real(beta)):.3f}|1>"
+                else:  # Complex coefficient
+                    return f"{alpha:.3f}|0> + ({beta:.3f})|1>"
         else:
             # Mixed state
             return f"Mixed state (purity: {trace_rho_squared:.3f})"
